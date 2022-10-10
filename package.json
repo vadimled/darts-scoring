@@ -1,6 +1,6 @@
 {
   "name": "darts-scoring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -14,6 +14,9 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.4",
+    "sass": "^1.55.0",
+    "@reduxjs/toolkit": "^1.8.5",
+    "react-redux": "^8.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -39,5 +42,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "create-react-component-folder-jovpet": "^1.6.0"
+  },
+  "crcf": [
+    "notest",
+    "typescript",
+    "scss"
+  ]
+
 }

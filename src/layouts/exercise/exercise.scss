@@ -1,0 +1,10 @@
+.exercise-wrapper {
+  display: flex;
+  width: 100vw;
+  height: calc((100vh - 60px)/2);
+
+  button{
+    width: 100px;
+    height: 60px;
+  }
+}
