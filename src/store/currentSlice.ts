@@ -1,13 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-// interface IUserData {
-//     exercises: IExercise[];
-// }
-//
-// interface ISet {
-//     [setName: string]: number | undefined
-// }
-//
 interface ICurrent {
     exerciseStarted: boolean
 }
@@ -19,8 +11,13 @@ const initialCurrentData: ICurrent =  {
 const currentSlice = createSlice({
     initialState: initialCurrentData,
     name: 'current',
-    reducers: {},
+    reducers: {
+        SET_EXERCISE_STATE_CHANGED: (state) => {
+            state.exerciseStarted = !state.exerciseStarted;
+        }
+    },
     extraReducers: undefined
 });
 
-export default currentSlice.reducer;
+export const currentSliceAction = currentSlice.actions;
+export const currentSliceReducer = currentSlice.reducer;

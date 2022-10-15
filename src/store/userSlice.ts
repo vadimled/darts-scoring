@@ -44,4 +44,5 @@ const userSlice = createSlice({
     extraReducers: undefined
 });
 
-export default userSlice.reducer;
+export const userSliceReducer = userSlice.reducer;
+export const userSliceAction = userSlice.actions;
