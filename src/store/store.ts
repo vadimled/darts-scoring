@@ -1,12 +1,12 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {userSliceReducer} from './userSlice';
-import {currentSliceReducer} from './currentSlice';
-import {setupListeners} from '@reduxjs/toolkit/query';
+import { configureStore } from '@reduxjs/toolkit';
+import { userSliceReducer } from './userSlice';
+import { currentSliceReducer } from './currentSlice';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
   reducer: {
-	user: userSliceReducer,
-	current: currentSliceReducer
+    user: userSliceReducer,
+    current: currentSliceReducer
   }
 });
 setupListeners(store.dispatch);
