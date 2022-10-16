@@ -3,8 +3,12 @@
   width: 100vw;
   height: calc((100vh - 60px)/2);
 
-  button{
-    width: 100px;
+  .start-exercise{
+    width: 150px;
+    height: 60px;
+  }
+  .successes-times{
+    width: 150px;
     height: 60px;
   }
 }

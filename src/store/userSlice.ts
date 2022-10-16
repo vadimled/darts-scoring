@@ -4,8 +4,8 @@ interface IUserData {
     exercises: IExercise[];
 }
 
-interface ISet {
-    [setName: string]: number | undefined
+export interface ISet {
+    [setName: string]: number | undefined | null
 }
 
 interface IExercise {
