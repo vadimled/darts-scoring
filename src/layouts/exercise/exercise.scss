@@ -1,7 +1,24 @@
 .exercise-wrapper {
   display: flex;
   width: 100vw;
-  height: calc((100vh - 60px) / 2);
+  height: calc((100vh - 60px));
+  flex-direction: column;
+
+  .exercise-actions {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .exercise-cards-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px;
+  }
 
   .start-exercise {
     width: 150px;
@@ -10,5 +27,11 @@
   .successes-times {
     width: 150px;
     height: 60px;
+  }
+  .step-counter {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    background-color: #cccccc;
   }
 }

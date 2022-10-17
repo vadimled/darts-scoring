@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "antd": "^4.23.5",
+    "classnames": "^2.3.2",
     "create-react-component-folder-jovpet": "^1.6.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
