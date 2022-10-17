@@ -6,16 +6,29 @@ import {
   getStepCounter
 } from '../../store/selectors/current-selectors';
 import { Button, InputNumber } from 'antd';
-import { KeyboardEvent, useState } from 'react';
+import {
+  KeyboardEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react';
 import ExerciseCard from '../../components/exercise-card';
 
 const Exercise = () => {
   const exerciseState = useAppSelector(getExerciseState);
   const stepCounter = useAppSelector(getStepCounter);
   const exercises = useAppSelector(getExercises);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { SET_EXERCISE_STATE_CHANGED, SET_EXERCISE_RESULT } = useActions();
   const [inputValue, setInputValue] = useState<null | number>(null);
+
+  useLayoutEffect(() => {
+    if (inputRef) {
+      inputRef.current?.focus();
+    }
+  }, [stepCounter, exerciseState]);
 
   const onExerciseState = () => {
     SET_EXERCISE_STATE_CHANGED();
@@ -28,7 +41,9 @@ const Exercise = () => {
     }
   };
   const onChange = (e: any) => {
-    console.log({ e });
+    if (inputRef) {
+      inputRef.current?.focus();
+    }
     e && setInputValue(+e);
   };
 
@@ -55,6 +70,7 @@ const Exercise = () => {
         </Button>
         {exerciseState && (
           <InputNumber
+            ref={inputRef}
             className='successes-times'
             name='enteredResults'
             // inputMode='numeric'
@@ -64,9 +80,9 @@ const Exercise = () => {
             onChange={onChange}
           />
         )}
+        <div className='step-counter'>{stepCounter > 0 && stepCounter}</div>
       </div>
       <div className='exercise-cards-wrapper'> {renderCards()} </div>
-      <div className='step-counter'>{stepCounter > 0 && stepCounter}</div>
     </div>
   );
 };

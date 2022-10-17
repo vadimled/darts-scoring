@@ -30,8 +30,10 @@
   }
   .step-counter {
     width: 150px;
-    height: 150px;
-    margin: 10px;
-    background-color: #cccccc;
-  }
+    height: 60px;
+    background-color: #52c41a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d6090c;  }
 }

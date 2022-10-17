@@ -1,1 +1,1 @@
-export const STEPS_LIMIT = 3;
+export const STEPS_LIMIT = 10;
