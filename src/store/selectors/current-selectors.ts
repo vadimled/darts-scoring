@@ -3,7 +3,7 @@ import { RootState } from '../store';
 export const getExerciseState = (state: RootState) =>
   state.current?.set?.exerciseStarted;
 
-export const getCurrentStep = (state: RootState) =>
+export const getCurrentExercise = (state: RootState) =>
   state.current?.set?.currentExercise;
 
 export const getSteps = (state: RootState) => state.current?.set?.exercises;

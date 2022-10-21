@@ -1,16 +1,21 @@
 .exercise-card-wrapper {
   display: flex;
-  width: 200px;
-  height: 220px;
+  width: 180px;
+  height: 200px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid #CCCCCC;
   padding: 16px;
   box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .3);
+  transition: all 0.4s ease;
 
   &.active-card{
-    box-shadow: 0 0 6px 3px rgb(0 200 0 / 10%);
+    width: 200px;
+    height: 220px;
+    background-color: beige;
+    box-shadow: 0 0 6px 3px rgb(0 216 0 / 28%);
+    transition: all 1s ease;
   }
 
   .exercise-name{

@@ -1,22 +1,18 @@
 import './exercise.scss';
 import { useActions, useAppSelector } from '../../store/hooks';
 import {
+  getCurrentExercise,
   getExercises,
   getExerciseState,
   getStepCounter
 } from '../../store/selectors/current-selectors';
 import { Button, InputNumber } from 'antd';
-import {
-  KeyboardEvent,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
-} from 'react';
+import { KeyboardEvent, useLayoutEffect, useRef, useState } from 'react';
 import ExerciseCard from '../../components/exercise-card';
 
 const Exercise = () => {
   const exerciseState = useAppSelector(getExerciseState);
+  const currentExercise = useAppSelector(getCurrentExercise);
   const stepCounter = useAppSelector(getStepCounter);
   const exercises = useAppSelector(getExercises);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,7 +36,7 @@ const Exercise = () => {
       setInputValue(null);
     }
   };
-  const onChange = (e: any) => {
+  const onChange = (e: number | null) => {
     if (inputRef) {
       inputRef.current?.focus();
     }
@@ -52,7 +48,14 @@ const Exercise = () => {
       const name = Object.keys(exercise)[0];
       const score = Object.values(exercise)[0];
 
-      return <ExerciseCard key={name} active name={name} score={score} />;
+      return (
+        <ExerciseCard
+          key={name}
+          active={currentExercise === name}
+          name={name}
+          score={score}
+        />
+      );
     });
   };
 
@@ -63,7 +66,7 @@ const Exercise = () => {
           type='primary'
           shape='round'
           size={'large'}
-          className='start-exercise'
+          className='start-exercise-btn'
           disabled={exerciseState}
           onClick={onExerciseState}>
           Start Exercise
