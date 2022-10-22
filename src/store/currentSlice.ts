@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ISet } from './userSlice';
-import { STEPS_LIMIT } from '../utils/constants';
 
 interface ICurrent {
   exerciseStarted: boolean;
@@ -36,30 +35,28 @@ const currentSlice = createSlice({
     SET_EXERCISE_STATE_CHANGED: (state) => {
       const { exercises, exerciseStarted } = state.set;
       state.set.exerciseStarted = !exerciseStarted;
-      const exerciseObj = exercises[0];
+      const exerciseObj = exercises[state.set.currentExerciseNumber];
       state.set.currentExercise = Object.keys(exerciseObj)[0];
+      state.set.currentStep = 1;
     },
     SET_EXERCISE_RESULT: (state, { payload }) => {
       const { exercises } = state.set;
-      let exerciseObj = exercises[state.set.currentExerciseNumber];
+      const exerciseObj = exercises[state.set.currentExerciseNumber];
       exerciseObj[state.set.currentExercise] += payload;
-      if (state.set.currentStep === STEPS_LIMIT) {
-        state.set.currentStep = 1;
-      } else {
-        state.set.currentStep += 1;
-      }
-
-      if (state.set.currentStep >= STEPS_LIMIT) {
-        state.set.currentExerciseNumber += 1;
-
-        if (exercises.length > state.set.currentExerciseNumber) {
-          exerciseObj = exercises[state.set.currentExerciseNumber];
-          state.set.currentExercise = Object.keys(exerciseObj)[0];
-        } else {
-          state.result = exercises.reduce((res, val) => {
-            return res + Object.values(val)[0];
-          }, 0);
-        }
+      state.set.currentStep += 1;
+    },
+    SET_EXERCISE_FINISHED: (state) => {
+      const { exercises } = state.set;
+      state.set.exerciseStarted = false;
+      state.set.currentStep = 0;
+      state.set.currentExerciseNumber += 1;
+      if (exercises.length === state.set.currentExerciseNumber) {
+        state.result = exercises.reduce((res, val) => {
+          return res + Object.values(val)[0];
+        }, 0);
+        state.set.exerciseStarted = false;
+        state.set.currentStep = 0;
+        state.set.currentExerciseNumber = 0;
       }
     },
     CLEAR_CURRENT_DATA: (state) => {

@@ -10,7 +10,7 @@ interface IExerciseCard {
 }
 const ExerciseCard: FC<IExerciseCard> = ({ name, active, score }) => {
   return (
-    <div className={cn('exercise-card-wrapper', { 'active-card': active })}>
+    <div className={cn('exercise-card', { 'active-card': active })}>
       <div className='exercise-name'>{name}</div>
       <div className='exercise-score'>{score.toString()}</div>
     </div>

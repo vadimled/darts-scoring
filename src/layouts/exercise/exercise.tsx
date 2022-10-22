@@ -7,17 +7,32 @@ import {
   getStepCounter
 } from '../../store/selectors/current-selectors';
 import { Button, InputNumber } from 'antd';
-import { KeyboardEvent, useLayoutEffect, useRef, useState } from 'react';
+import {
+  KeyboardEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react';
 import ExerciseCard from '../../components/exercise-card';
+import cn from 'classnames';
+import { STEPS_LIMIT } from '../../utils/constants';
+import { getExerciseResult } from '../../store/selectors/user-selector';
 
 const Exercise = () => {
   const exerciseState = useAppSelector(getExerciseState);
   const currentExercise = useAppSelector(getCurrentExercise);
   const stepCounter = useAppSelector(getStepCounter);
   const exercises = useAppSelector(getExercises);
+  const exerciseResult = useAppSelector(getExerciseResult);
   const inputRef = useRef<HTMLInputElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
-  const { SET_EXERCISE_STATE_CHANGED, SET_EXERCISE_RESULT } = useActions();
+  const {
+    SET_EXERCISE_STATE_CHANGED,
+    SET_EXERCISE_RESULT,
+    SET_EXERCISE_FINISHED
+  } = useActions();
   const [inputValue, setInputValue] = useState<null | number>(null);
 
   useLayoutEffect(() => {
@@ -25,6 +40,18 @@ const Exercise = () => {
       inputRef.current?.focus();
     }
   }, [stepCounter, exerciseState]);
+
+  useLayoutEffect(() => {
+    if (btnRef && exerciseResult === 0) {
+      btnRef.current?.focus();
+    }
+  }, [exerciseState]);
+
+  useEffect(() => {
+    if (stepCounter > STEPS_LIMIT) {
+      SET_EXERCISE_FINISHED();
+    }
+  }, [stepCounter]);
 
   const onExerciseState = () => {
     SET_EXERCISE_STATE_CHANGED();
@@ -63,6 +90,7 @@ const Exercise = () => {
     <div className='exercise-wrapper'>
       <div className='exercise-actions'>
         <Button
+          ref={btnRef}
           type='primary'
           shape='round'
           size={'large'}
@@ -83,9 +111,16 @@ const Exercise = () => {
             onChange={onChange}
           />
         )}
-        <div className='step-counter'>{stepCounter > 0 && stepCounter}</div>
       </div>
       <div className='exercise-cards-wrapper'> {renderCards()} </div>
+      {stepCounter > 0 && (
+        <div
+          className={cn('step-counter', {
+            'last-step': stepCounter === STEPS_LIMIT
+          })}>
+          {stepCounter}
+        </div>
+      )}
     </div>
   );
 };
