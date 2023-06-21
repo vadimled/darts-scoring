@@ -20,7 +20,7 @@ const initialCurrentData: ICurrent = {
     { bull: 0 },
     { SP: 0 }, // set of points (try set maximum points)
     { HBR: 0 }, // half big round(1-10)
-    { BR: 0 }, // half big round(1-20)
+    { BR: 0 }, // big round(1-20)
     { '14': 0 } // doubles
   ]
 };

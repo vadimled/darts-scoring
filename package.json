@@ -49,7 +49,8 @@
     "create-react-component-folder-jovpet": "^1.6.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "use-sound": "^4.0.1"
   },
   "crcf": [
     "notest",
